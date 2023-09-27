@@ -1,4 +1,5 @@
 import shutil
+import os
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
 from extraction.audio_from_video import audio_from_video
@@ -10,8 +11,8 @@ app = FastAPI()
 @app.post("/upload/")
 async def extract_text_from_mp4(file: UploadFile):
     file_name = file.filename
-    video_file_name = f'/home/imentus/Desktop/projects/translator/data/video/{file_name}'
-    audio_file_name = f'/home/imentus/Desktop/projects/translator/data/audio/{file_name.replace(".mp4", ".wav")}'
+    video_file_name = f'{os.getcwd()}/data/video/{file_name}'
+    audio_file_name = f'{os.getcwd()}/data/audio/{file_name.replace(".mp4", ".wav")}'
 
     try:
         # Check if the uploaded file is an MP4 file
